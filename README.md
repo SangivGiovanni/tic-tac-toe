@@ -1,4 +1,4 @@
 # tic-tac-toe
 
-## making code for the game
-### team: Jordan, Josh and Gio
+#### Making code for the game
+#### Team: Jordan, Josh and Gio
