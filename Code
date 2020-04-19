@@ -3,6 +3,7 @@
 # The board to start with    
 the_board = [" "]*10
 
+
 #This function displays the board
 def print_board(the_board):
     print(box[1],"|",box[2],"|",box[3])
@@ -11,11 +12,25 @@ def print_board(the_board):
     print("--+---+--")
     print(box[7],"|",box[8],"|",box[9])
 
-#Asks player what position they want to place marker
-def position_of_piece(num,mark):
-    position = int(input("%s,insert the space you want to place the %s: "%(num,mark)))
 
-    return position
+# Function to set markers for players
+def player_input():
+    marker = ''
+
+    while marker != 'X' and marker != 'O':
+        marker = input('Player 1 chose X or O: ').upper()
+
+    if marker == 'X':
+        return 'X', 'O'
+    else:
+        return 'O', 'X'
+
+player1_marker, player2_marker = player_input()
+
+
+# Function to place palyer's marker on board
+def place_marker(board, player_marker, position):
+    board[position] = player_marker
 
 
 #This is where the game starts
