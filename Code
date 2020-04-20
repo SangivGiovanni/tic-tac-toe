@@ -86,7 +86,14 @@ def replay():
 
 #This is where the game starts
 
-def main():
+ready_to_play = input('Ready to play? Y or N? ').upper()
+
+    if ready_to_play == 'Y':
+        game = True
+    else:
+        game = False
+        
+While game 
 
     #Prints board to give instructions to the player on the numbers for the positions
     print_board(the_board)
@@ -109,3 +116,8 @@ def main():
         else:
             print("Position is already taken, chose a different position.")
             position = position_of_piece(player,marker)
+
+
+    # Break out of while loop on replay()
+    if not replay():
+        break
