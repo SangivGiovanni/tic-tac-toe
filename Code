@@ -1,4 +1,4 @@
-#### Add Win check function 
+#### Tic Tac Toe 
 
 import random
 
@@ -84,6 +84,8 @@ def replay():
     
 
 
+
+
 #This is where the game starts
 
 ready_to_play = input('Ready to play? Y or N? ').upper()
@@ -116,6 +118,8 @@ While game
         else:
             print("Position is already taken, chose a different position.")
             position = position_of_piece(player,marker)
+
+
 
 
     # Break out of while loop on replay()
