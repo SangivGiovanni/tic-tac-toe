@@ -1,18 +1,19 @@
-#### Tic Tac Toe 
+# Tic Tac Toe
 
 import random
 
-# The board to start with    
-the_board = [" "]*10
+# The board to start with
+the_board = [" "] * 10
 
 
-#This function displays the board
-def print_board(the_board):
-    print(the_board[1],"|",the_board[2],"|",the_board[3])
+# This function displays the board
+def print_board(board):
+    print(board[1], "|", board[2], "|", board[3])
     print("--+---+--")
-    print(the_board[4],"|",the_board[5],"|",the_board[6])
+    print(board[4], "|", board[5], "|", board[6])
     print("--+---+--")
-    print(the_board[7],"|",the_board[8],"|",the_board[9])
+    print(board[7], "|", board[8], "|", board[9])
+    print(' \n  ')
 
 
 # Function to set markers for players
@@ -26,8 +27,6 @@ def player_input():
         return 'X', 'O'
     else:
         return 'O', 'X'
-
-player1_marker, player2_marker = player_input()
 
 
 # Function to place palyer's marker on board
@@ -60,7 +59,6 @@ def space_check(board, position):
 
 
 def full_board_check(board):
-
     for i in range(1, 10):
         if space_check(board, i):
             return False
@@ -68,7 +66,6 @@ def full_board_check(board):
 
 
 def player_choice(board):
-
     position = 0
 
     while position not in [1, 2, 3, 4, 5, 6, 7, 8, 9] or not space_check(board, position):
@@ -81,66 +78,52 @@ def replay():
     choice = input('Play again? Enter Y or N: ').upper()
 
     return choice == 'Y'
-    
 
 
-#This is where the game starts
+# This is where the game starts
 
 ready_to_play = input('Ready to play? Y or N? ').upper()
 
-    if ready_to_play == 'Y':
+if ready_to_play == 'Y':
+    game = True
+else:
+    game = False
+
+
+# The game is held in this while loop
+while game:
+    the_board = [" "] * 10
+    player1_marker, player2_marker = player_input()
+
+    # The for loop represents the number of goes the players will have in total
+    for i in range(9):
+        # If i is even it will be player ones turn
+        if i % 2 == 0:
+            print_board(the_board)
+            position = player_choice(the_board)
+            place_marker(the_board, player1_marker, position)
+            print_board(the_board)
+
+            if win_check(the_board, player1_marker):
+                print("Player 1 has won!")
+                break
+
+        # If i is odd it will be player twos turn
+        else:
+            position = player_choice(the_board)
+            place_marker(the_board, player2_marker, position)
+            print_board(the_board)
+            if win_check(the_board, player2_marker):
+                print("Player 2 has won!")
+                break
+
+    # This calls for a function to check if the board is full, if so will print tie
+    done = full_board_check(the_board)
+    if done:
+        print("It's a tie!")
+
+        # Break out of while loop on replay()
+    if replay():
         game = True
     else:
-        game = False
-        
-#This is where the game starts
-def start_game():
-
-    #The game is held in this while loop
-    while game is True:
-        player1_marker, player2_marker = player_input()
-        
-        #The for loop represents the number of goes the players will have in total
-        for i in range(9):
-            #If i is even it will be player ones turn
-            if i%2 == 0:
-                print_board(the_board)
-                position = player_choice(the_board)
-                place_marker(the_board, player1_marker,position)
-                print_board(the_board)
-                
-                if win_check(the_board,player1_marker):
-                    print("Player 1 has won!")
-                    break
-            
-            #If i is odd it will be player twos turn    
-            else:
-                position = player_choice(the_board)
-                place_marker(the_board, player2_marker,position)
-                print_board(the_board)
-                if win_check(the_board,player2_marker):
-                    print("Player 2 has won!")
-                    break
-        
-        #This calls for a function to check if the board is full, if so will print tie        
-        done = full_board_check(the_board)  
-        if done:
-            print("It's a tie!")    
-        
-        #Break out of while loop on replay()
-        decision = replay()
-        if decision == "Y":
-            start_game()
-        else:
-            break    
-   
-   
-   
-start_game()
-
-   
-
-
-
-
-   
+        break
