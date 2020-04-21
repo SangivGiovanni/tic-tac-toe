@@ -84,8 +84,6 @@ def replay():
     
 
 
-
-
 #This is where the game starts
 
 ready_to_play = input('Ready to play? Y or N? ').upper()
@@ -95,33 +93,54 @@ ready_to_play = input('Ready to play? Y or N? ').upper()
     else:
         game = False
         
-While game 
+#This is where the game starts
+def start_game():
 
-    #Prints board to give instructions to the player on the numbers for the positions
-    print_board(the_board)
-
-    #This loop controls the number of goes each player has
-    for i in range(9):
-        if i%2==0:
-            player = "Player 1"
-            marker = "X"
+    #The game is held in this while loop
+    while game is True:
+        player1_marker, player2_marker = player_input()
+        
+        #The for loop represents the number of goes the players will have in total
+        for i in range(9):
+            #If i is even it will be player ones turn
+            if i%2 == 0:
+                print_board(the_board)
+                position = player_choice(the_board)
+                place_marker(the_board, player1_marker,position)
+                print_board(the_board)
+                
+                if win_check(the_board,player1_marker):
+                    print("Player 1 has won!")
+                    break
+            
+            #If i is odd it will be player twos turn    
+            else:
+                position = player_choice(the_board)
+                place_marker(the_board, player2_marker,position)
+                print_board(the_board)
+                if win_check(the_board,player2_marker):
+                    print("Player 2 has won!")
+                    break
+        
+        #This calls for a function to check if the board is full, if so will print tie        
+        done = full_board_check(the_board)  
+        if done:
+            print("It's a tie!")    
+        
+        #Break out of while loop on replay()
+        decision = replay()
+        if decision == "Y":
+            start_game()
         else:
-            player = "Player 2"
-            marker ="O"
+            break    
+   
+   
+   
+start_game()
 
-        #The players choices for which position they choose are stored in variable position
-        position = position_of_piece(player,marker)
-
-        if box[position] == " ":
-            box[position] = marker
-            print_board()
-        else:
-            print("Position is already taken, chose a different position.")
-            position = position_of_piece(player,marker)
+   
 
 
 
 
-    # Break out of while loop on replay()
-    if not replay():
-        break
+   
